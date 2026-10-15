@@ -12,46 +12,61 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("Home");
+
+  const handleLinkClick = (name: string) => {
+    setActiveLink(name);
+    setMenuOpen(false);
+  };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white">
+      <nav className="mx-auto flex h-[70px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
 
         {/* Mobile Hamburger */}
         <button
           type="button"
-          className="flex items-center justify-center lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          className="flex h-9 w-9 shrink-0 cursor-pointer flex-col items-center justify-center gap-[5px] lg:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
         >
           {menuOpen ? (
-            <span className="text-2xl text-gray-800">✕</span>
+            <span className="text-2xl text-slate-900">×</span>
           ) : (
-            <div className="flex flex-col gap-1.5">
-              <span className="h-0.5 w-6 bg-gray-800"></span>
-              <span className="h-0.5 w-6 bg-gray-800"></span>
-              <span className="h-0.5 w-6 bg-gray-800"></span>
-            </div>
+            <>
+              <span className="h-[2px] w-5 bg-slate-900"></span>
+              <span className="h-[2px] w-5 bg-slate-900"></span>
+              <span className="h-[2px] w-5 bg-slate-900"></span>
+            </>
           )}
         </button>
 
         {/* Brand Logo */}
-        <a href="#home" className="flex items-center">
+        <a
+          href="#home"
+          onClick={() => handleLinkClick("Home")}
+          className="flex shrink-0 items-center"
+        >
           <img
             src={logo}
             alt="Dev Stack Logo"
-            className="w-28 sm:w-36"
+            className="h-auto w-[105px] sm:w-[130px]"
           />
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-600 transition hover:text-pink-600"
+              onClick={() => handleLinkClick(link.name)}
+              className={`text-[13px] font-medium transition-colors hover:text-pink-600 ${
+                activeLink === link.name
+                  ? "text-pink-600"
+                  : "text-slate-600"
+              }`}
             >
               {link.name}
             </a>
@@ -59,36 +74,42 @@ function Navbar() {
         </div>
 
         {/* Authentication Buttons */}
-        <div className="flex items-center gap-2 sm:gap-5">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <button
             type="button"
-            className="cursor-pointer text-xs font-medium text-gray-700 hover:text-pink-600 sm:text-sm"
+            className="cursor-pointer whitespace-nowrap text-[11px] font-medium text-slate-700 transition hover:text-pink-600 sm:text-[13px]"
           >
             Sign In
           </button>
 
           <button
             type="button"
-            className="brand-gradient cursor-pointer rounded-full px-3 py-2 text-xs font-semibold text-white transition hover:opacity-90 sm:px-6 sm:py-3 sm:text-sm"
+            className="cursor-pointer whitespace-nowrap rounded-full bg-[#e31183] px-3 py-2 text-[11px] font-medium text-white transition hover:bg-pink-700 sm:px-5 sm:py-2.5 sm:text-[13px]"
           >
             Sign Up
           </button>
         </div>
       </nav>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Dropdown Navigation */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-full border-b border-gray-100 bg-white p-4 shadow-lg lg:hidden">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="block rounded-lg px-4 py-3 text-sm font-medium text-gray-700 hover:bg-pink-50 hover:text-pink-600"
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="absolute top-full left-0 w-full border-b border-slate-100 bg-white px-5 py-3 shadow-lg lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => handleLinkClick(link.name)}
+                className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                  activeLink === link.name
+                    ? "bg-pink-50 text-pink-600"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-pink-600"
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
         </div>
       )}
     </header>
