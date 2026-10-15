@@ -75,7 +75,7 @@ function YourStack({
             ))}
           </div>
 
-          {/* Remove All Button */}
+          {/*  Remove All Button  */}
           <button
             type="button"
             onClick={onRemoveAll}
