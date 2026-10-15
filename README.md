@@ -1,75 +1,82 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Dev Stack Builder
 
-Currently, two official plugins are available:
+Dev Stack Builder is a responsive React application that helps developers explore modern technologies and create their own development stack.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Users can browse technologies, view important details, add their favorites to a stack, and remove technologies whenever needed.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- TypeScript
+- Vite
+- Tailwind CSS
+- DaisyUI
+- React-Toastify
+- React Icons
+- JSON
 
-## Expanding the ESLint configuration
+## Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Explore Technologies
+Browse 12 modern development technologies with their icons, categories, descriptions, ratings, difficulty levels, and badges.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. Build Your Stack
+Add technologies to your personal stack, prevent duplicate selections, remove individual items, or clear the entire stack.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 3. Responsive and Interactive UI
+Enjoy a responsive layout with a mobile navigation menu, loading spinner, gradient styling, and toast notifications.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## React Questions and Answers
 
+### 1. What is JSX, and why is it used in React?
+
+JSX is a syntax that lets us write HTML-like code inside JavaScript or TypeScript. It makes React components easier to create and understand.
+
+### 2. What is the difference between props and state?
+
+Props are used to pass data from a parent component to a child component. State stores data inside a component that can change over time.
+
+### 3. What does the useState hook do, and where did you use it in this project?
+
+The useState hook allows React components to store and update data. I used it to manage selected technologies, loading state, errors, and the mobile navigation menu.
+
+### 4. What does the useEffect hook do, and why did you need it to load the JSON data?
+
+The useEffect hook runs side effects in React components. I used it to fetch technology data from the local JSON file when the application loads.
+
+### 5. Why does every item in a .map() list need a unique key prop?
+
+A unique key helps React identify each item in a list. It allows React to update the correct elements when the list changes.
+
+### 6. What is conditional rendering? Show one place you used it.
+
+Conditional rendering means showing different UI elements based on a condition. I used it in the Your Stack section to display an empty message when no technology is selected.
+
+### 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
+
+A parent passes data to a child through props. A child communicates with the parent by calling a callback function received through props.
+
+In this project, TechnologyCard receives technology data and an onAdd function from its parent.
+
+## How to Run Locally
+
+1. Clone the repository.
+2. Open the project folder.
+3. Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+4. Start the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+5. Open the localhost URL shown in the terminal.
+
+## Author
+
+Developed as part of Programming Hero Assignment 5.
